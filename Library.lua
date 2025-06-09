@@ -2682,7 +2682,7 @@ end;
 do
     Library.NotificationArea = Library:Create('Frame', {
         BackgroundTransparency = 1;
-        Position = UDim2.new(0, -0.5, 0, 0);
+        Position = UDim2.new(0, 0, 0.5, 0);
         Size = UDim2.new(0, 600, 0, 400);
         ZIndex = 100;
         Parent = ScreenGui;
@@ -2708,7 +2708,7 @@ do
         BackgroundColor3 = Library.MainColor;
         BorderColor3 = Library.AccentColor;
         BorderMode = Enum.BorderMode.Inset;
-        Size = UDim2.new(1, 0, 1, 0);
+        Size = UDim2.new(0.005, 0, 0.965, 0);
         ZIndex = 201;
         Parent = WatermarkOuter;
     });
@@ -2747,7 +2747,7 @@ do
     local WatermarkLabel = Library:CreateLabel({
         Position = UDim2.new(0, 5, 0, 0);
         Size = UDim2.new(1, -4, 1, 0);
-        TextSize = 14;
+        TextSize = 18;
         TextXAlignment = Enum.TextXAlignment.Left;
         ZIndex = 203;
         Parent = InnerFrame;
@@ -2755,7 +2755,7 @@ do
 
     Library.Watermark = WatermarkOuter;
     Library.WatermarkText = WatermarkLabel;
-    Library:MakeDraggable(Library.Watermark);
+    --Library:MakeDraggable(Library.Watermark);
 
 
 
@@ -2901,7 +2901,7 @@ function Library:Notify(Text, Time)
         Size = UDim2.new(1, -4, 1, 0);
         Text = Text;
         TextXAlignment = Enum.TextXAlignment.Left;
-        TextSize = 20;
+        TextSize = 18;
         ZIndex = 103;
         Parent = InnerFrame;
     });
