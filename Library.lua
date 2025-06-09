@@ -1220,7 +1220,8 @@ do
             if ParentObj.Type == 'Toggle' and KeyPicker.SyncToggleState then
                 ParentObj:SetValue(not ParentObj.Value)
             end
-
+            
+            Library:Notify("%s has been toggled %s"):format(KeyPicker.Text, KeyPicker.Value and "ON" or "OFF)
             Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
             Library:SafeCallback(KeyPicker.Clicked, KeyPicker.Toggled)
         end
