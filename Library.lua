@@ -1221,7 +1221,7 @@ do
                 ParentObj:SetValue(not ParentObj.Value)
             end
             
-            Library:Notify(("%s has been toggled %s"):format(KeyPicker.Text, KeyPicker.Value and "ON" or "OFF"))
+            --Library:Notify(("%s has been toggled %s"):format(KeyPicker.Text, KeyPicker.Value and "ON" or "OFF"))
             Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
             Library:SafeCallback(KeyPicker.Clicked, KeyPicker.Toggled)
         end
@@ -2766,7 +2766,7 @@ do
         BorderColor3 = Color3.new(0, 0, 0);
         Position = UDim2.new(0, 10, 0.5, 0);
         Size = UDim2.new(0, 210, 0, 20);
-        Visible = false;
+        Visible = true;
         ZIndex = 100;
         Parent = ScreenGui;
     });
