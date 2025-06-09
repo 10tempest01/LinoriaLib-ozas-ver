@@ -2683,7 +2683,7 @@ do
     Library.NotificationArea = Library:Create('Frame', {
         BackgroundTransparency = 1;
         Position = UDim2.new(0.5, 0, 0, 40);
-        Size = UDim2.new(0, 300, 0, 200);
+        Size = UDim2.new(0, 600, 0, 400);
         ZIndex = 100;
         Parent = ScreenGui;
     });
@@ -2901,7 +2901,7 @@ function Library:Notify(Text, Time)
         Size = UDim2.new(1, -4, 1, 0);
         Text = Text;
         TextXAlignment = Enum.TextXAlignment.Left;
-        TextSize = 14;
+        TextSize = 20;
         ZIndex = 103;
         Parent = InnerFrame;
     });
