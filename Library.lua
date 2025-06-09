@@ -2682,7 +2682,7 @@ end;
 do
     Library.NotificationArea = Library:Create('Frame', {
         BackgroundTransparency = 1;
-        Position = UDim2.new(0.5, 0, 0, 40);
+        Position = UDim2.new(0, -0.5, 0, 0);
         Size = UDim2.new(0, 600, 0, 400);
         ZIndex = 100;
         Parent = ScreenGui;
