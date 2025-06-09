@@ -1090,7 +1090,7 @@ do
         local ContainerLabel = Library:CreateLabel({
             TextXAlignment = Enum.TextXAlignment.Left;
             Size = UDim2.new(1, 0, 0, 18);
-            TextSize = 13;
+            TextSize = 18;
             Visible = false;
             ZIndex = 110;
             Parent = Library.KeybindContainer;
@@ -2683,7 +2683,7 @@ end;
 do
     Library.NotificationArea = Library:Create('Frame', {
         BackgroundTransparency = 1;
-        Position = UDim2.new(0, 0, 0.5, 0);
+        Position = UDim2.new(0, 0, 0.7, 0);
         Size = UDim2.new(0, 600, 0, 400);
         ZIndex = 100;
         Parent = ScreenGui;
@@ -2921,7 +2921,7 @@ function Library:Notify(Text, Time)
         BackgroundColor3 = 'AccentColor';
     }, true);
 
-    pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, XSize + 8 + 4, 0, YSize), 'Out', 'Quad', 0.4, true);
+    pcall(NotifyOuter.TweenSize, NotifyOuter, UDim2.new(0, XSize + 12, 0, YSize), "Out", "Quad", 0.4, true);
 
     task.spawn(function()
         wait(Time or 5);
