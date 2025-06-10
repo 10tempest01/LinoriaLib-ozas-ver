@@ -1157,12 +1157,17 @@ do
             else
                 ContainerLabel.Text = string.format('[%s] %s (%s)', KeyPicker.Value, Info.Text, KeyPicker.Mode);
             end
-            
+
             ContainerLabel.Visible = true;
             ContainerLabel.TextColor3 = State and Library.AccentColor or Library.FontColor;
             if not State and Toggles.OnlyShowEnabledKeybinds and Toggles.OnlyShowEnabledKeybinds.Value then
                 ContainerLabel.Visible = false;
             end;
+
+            if KeyPicker.Show ~= nil then
+                ContainerLabel.Visible = KeyPicker.Show
+            end
+
             Library.RegistryMap[ContainerLabel].KEYBINDLABEL = true;
             Library.RegistryMap[ContainerLabel].Properties.TextColor3 = State and 'AccentColor' or 'FontColor';
 
@@ -1181,8 +1186,23 @@ do
             Library.KeybindFrame.Size = UDim2.new(0, math.max(XSize + 10, 210), 0, YSize + 23)
         end;
 
-        function KeyPicker:SetDisplay(value)
-            ContainerLabel.Visible = value
+        function KeyPicker:SetDisplay(Value)
+            print(Value)
+            ContainerLabel.Visible = Value
+
+            local YSize = 0
+            local XSize = 0
+
+            for _, Label in next, Library.KeybindContainer:GetChildren() do
+                if Label:IsA('TextLabel') and Label.Visible then
+                    YSize = YSize + 18;
+                    if (Label.TextBounds.X > XSize) then
+                        XSize = Label.TextBounds.X
+                    end
+                end;
+            end;
+
+            Library.KeybindFrame.Size = UDim2.new(0, math.max(XSize + 10, 210), 0, YSize + 23)
         end
 
         function KeyPicker:GetState()
