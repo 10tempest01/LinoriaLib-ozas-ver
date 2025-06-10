@@ -1087,7 +1087,7 @@ do
             Parent = ModeSelectInner;
         });
 
-        local ContainerLabel = Library:CreateLabel({
+        getgenv().ContainerLabel = Library:CreateLabel({
             TextXAlignment = Enum.TextXAlignment.Left;
             Size = UDim2.new(1, 0, 0, 18);
             TextSize = 18;
