@@ -1150,6 +1150,24 @@ do
                 return;
             end;
 
+            if Info.Text:lower():find("backdash") then
+                ContainerLabel.Visible = Toggles.EnableBackdashCancels.Value
+            end
+
+            local thing = {
+                ["SideDashCancel"] = "Side Dash Cancel Keybind"
+                ["InstantTwistedMacro"] = "Instant Twisted Keybind"
+                ["LoopDashMacro"] = "Loop Dash Keybind"
+                ["InstantLethalMacro"] = "Instant Lethal Keybind"
+                ["KerDashMacro"] = "Ker Dash Keybind"
+            }
+
+            for toggleName, keybindName in pairs(thing) do
+                if keybindName == Info.Text then
+                    ContainerLabel.Visible = Toggles[toggleName].Value
+                end
+            end
+            
             local State = KeyPicker:GetState();
 
             if KeyPicker.Mode == "Always" then
