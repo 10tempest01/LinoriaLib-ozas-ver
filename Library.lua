@@ -1181,6 +1181,10 @@ do
             Library.KeybindFrame.Size = UDim2.new(0, math.max(XSize + 10, 210), 0, YSize + 23)
         end;
 
+        function KeyPicker:SetDisplay(value)
+            ContainerLabel.Visible = value
+        end
+
         function KeyPicker:GetState()
             if KeyPicker.Mode == 'Always' then
                 return true;
