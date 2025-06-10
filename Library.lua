@@ -1150,7 +1150,9 @@ do
                 return;
             end;
 
-            if Info.Text:lower():find("backdash") then
+            local lowerInfoText = string.lower(Info.Text)
+            
+            if string.find(lowerInfoText, "backdash") then
                 ContainerLabel.Visible = Toggles.EnableBackdashCancels.Value
             end
 
