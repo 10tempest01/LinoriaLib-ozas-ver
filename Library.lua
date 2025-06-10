@@ -1087,7 +1087,7 @@ do
             Parent = ModeSelectInner;
         });
 
-        getgenv().ContainerLabel = Library:CreateLabel({
+        local ContainerLabel = Library:CreateLabel({
             TextXAlignment = Enum.TextXAlignment.Left;
             Size = UDim2.new(1, 0, 0, 18);
             TextSize = 18;
@@ -1150,26 +1150,6 @@ do
                 return;
             end;
 
-            local lowerInfoText = string.lower(Info.Text)
-            
-            if string.find(lowerInfoText, "backdash") then
-                ContainerLabel.Visible = Toggles.EnableBackdashCancels.Value
-            end
-
-            local thing = {
-                ["SideDashCancel"] = "Side Dash Cancel Keybind"
-                ["InstantTwistedMacro"] = "Instant Twisted Keybind"
-                ["LoopDashMacro"] = "Loop Dash Keybind"
-                ["InstantLethalMacro"] = "Instant Lethal Keybind"
-                ["KerDashMacro"] = "Ker Dash Keybind"
-            }
-
-            for toggleName, keybindName in pairs(thing) do
-                if keybindName == Info.Text then
-                    ContainerLabel.Visible = Toggles[toggleName].Value
-                end
-            end
-            
             local State = KeyPicker:GetState();
 
             if KeyPicker.Mode == "Always" then
