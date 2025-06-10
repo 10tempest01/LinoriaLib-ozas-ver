@@ -1152,8 +1152,12 @@ do
 
             local State = KeyPicker:GetState();
 
-            ContainerLabel.Text = string.format('[%s] %s (%s)', KeyPicker.Value, Info.Text, KeyPicker.Mode);
-
+            if KeyPicker.Mode == "Always" then
+                ContainerLabel.Text = string.format('[%s] %s', KeyPicker.Value, Info.Text);
+            else
+                ContainerLabel.Text = string.format('[%s] %s (%s)', KeyPicker.Value, Info.Text, KeyPicker.Mode);
+            end
+            
             ContainerLabel.Visible = true;
             ContainerLabel.TextColor3 = State and Library.AccentColor or Library.FontColor;
             if not State and Toggles.OnlyShowEnabledKeybinds and Toggles.OnlyShowEnabledKeybinds.Value then
