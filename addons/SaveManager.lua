@@ -265,6 +265,26 @@ local SaveManager = {} do
 			SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
 		end
 
+		section:AddToggle('OnlyShowEnabledKeybinds', {
+            Text = 'Only Show Enabled Keybinds',
+            false,
+            'Only Show Enabled Keybinds'
+        })
+
+        Toggles.OnlyShowEnabledKeybinds:OnChanged(function()
+            task.spawn(function()
+                xpcall(function()
+                    task.wait(2.5)
+                    if not self.Library or not self.Library.RegistryMap then return; end
+                    for i, v in pairs(self.Library.RegistryMap[ContainerLabel]) do
+                        if v.KEYBINDLABEL and v.Properties.TextColor3 ~= "AccentColor" then
+                            v.Visible = not Toggles.OnlyShowEnabledKeybinds.Value;
+                        end;
+                    end;
+                end,warn);
+            end);
+        end);
+
 		SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
 	end
 
