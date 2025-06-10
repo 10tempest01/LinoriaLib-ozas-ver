@@ -1156,7 +1156,10 @@ do
 
             ContainerLabel.Visible = true;
             ContainerLabel.TextColor3 = State and Library.AccentColor or Library.FontColor;
-
+            if not State and Toggles.OnlyShowEnabledKeybinds and Toggles.OnlyShowEnabledKeybinds.Value then
+                ContainerLabel.Visible = false;
+            end;
+            Library.RegistryMap[ContainerLabel].KEYBINDLABEL = true;
             Library.RegistryMap[ContainerLabel].Properties.TextColor3 = State and 'AccentColor' or 'FontColor';
 
             local YSize = 0
