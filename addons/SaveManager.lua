@@ -213,10 +213,10 @@ local SaveManager = {} do
             task.spawn(function()
                 xpcall(function()
                     task.wait(2.5)
-		    print("test")
+		            print(ContainerLabel)
                     if not self.Library or not self.Library.RegistryMap then return; end
-                    for i, v in pairs(self.Library.RegistryMap[ContainerLabel]) do
-                        if v.KEYBINDLABEL and v.Properties.TextColor3 ~= "AccentColor" then
+                    for i, v in pairs(self.Library.KeybindContainer:GetChildren()) do
+                        if v:IsA("TextLabel") and v.TextColor3 ~= self.Library.AccentColor then
                             v.Visible = not Toggles.OnlyShowEnabledKeybinds.Value;
                         end;
                     end;
