@@ -1189,7 +1189,7 @@ do
         end;
 
         function KeyPicker:SetDisplay(Value)
-            print(Value)
+            --print(Value)
             ContainerLabel.Visible = Value
 
             local YSize = 0
