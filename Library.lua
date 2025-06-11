@@ -1147,6 +1147,22 @@ do
 
         KeyPicker.Show = true
         
+        function updateKeyDisplay()
+            local YSize = 0
+            local XSize = 0
+
+            for _, Label in next, Library.KeybindContainer:GetChildren() do
+                if Label:IsA('TextLabel') and Label.Visible then
+                    YSize = YSize + 18;
+                    if (Label.TextBounds.X > XSize) then
+                        XSize = Label.TextBounds.X
+                    end
+                end;
+            end;
+
+            Library.KeybindFrame.Size = UDim2.new(0, math.max(XSize + 15, 210), 0, YSize + 23)
+        end
+
         function KeyPicker:Update()
             if Info.NoUI then
                 return;
@@ -1162,8 +1178,12 @@ do
 
             ContainerLabel.Visible = true;
             ContainerLabel.TextColor3 = State and Library.AccentColor or Library.FontColor;
+
             if not State and Toggles.OnlyShowEnabledKeybinds and Toggles.OnlyShowEnabledKeybinds.Value then
+                --print("here", State, KeyPicker)
                 ContainerLabel.Visible = false;
+                updateKeyDisplay()
+                return
             end;
 
             if KeyPicker.Show ~= nil then
@@ -1173,19 +1193,7 @@ do
             Library.RegistryMap[ContainerLabel].KEYBINDLABEL = true;
             Library.RegistryMap[ContainerLabel].Properties.TextColor3 = State and 'AccentColor' or 'FontColor';
 
-            local YSize = 0
-            local XSize = 0
-
-            for _, Label in next, Library.KeybindContainer:GetChildren() do
-                if Label:IsA('TextLabel') and Label.Visible then
-                    YSize = YSize + 18;
-                    if (Label.TextBounds.X > XSize) then
-                        XSize = Label.TextBounds.X
-                    end
-                end;
-            end;
-
-            Library.KeybindFrame.Size = UDim2.new(0, math.max(XSize + 10, 210), 0, YSize + 23)
+            updateKeyDisplay()
         end;
 
         function KeyPicker:SetDisplay(Value)
