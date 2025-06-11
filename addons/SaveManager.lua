@@ -275,6 +275,7 @@ local SaveManager = {} do
             task.spawn(function()
                 xpcall(function()
                     task.wait(2.5)
+		    print(ContainerLabel)
                     if not self.Library or not self.Library.RegistryMap then return; end
                     for i, v in pairs(self.Library.RegistryMap[ContainerLabel]) do
                         if v.KEYBINDLABEL and v.Properties.TextColor3 ~= "AccentColor" then
