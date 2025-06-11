@@ -202,27 +202,6 @@ local SaveManager = {} do
 		assert(self.Library, 'Must set SaveManager.Library')
 		
 		local section = tab:AddRightGroupbox('Configuration')
-
-		section:AddToggle('OnlyShowEnabledKeybinds', {
-            Text = 'Only Show Enabled Keybinds',
-            false,
-            'Only Show Enabled Keybinds'
-        })
-
-        Toggles.OnlyShowEnabledKeybinds:OnChanged(function()
-            task.spawn(function()
-                xpcall(function()
-                    task.wait(2.5)
-		            print(ContainerLabel)
-                    if not self.Library or not self.Library.RegistryMap then return; end
-                    for i, v in pairs(self.Library.KeybindContainer:GetChildren()) do
-                        if v:IsA("TextLabel") and v.TextColor3 ~= self.Library.AccentColor then
-                            v.Visible = not Toggles.OnlyShowEnabledKeybinds.Value;
-                        end;
-                    end;
-                end,warn);
-            end);
-        end);
 		
 		section:AddInput('SaveManager_ConfigName',    { Text = 'Config name' })
 		section:AddDropdown('SaveManager_ConfigList', { Text = 'Config list', Values = self:RefreshConfigList(), AllowNull = true })
