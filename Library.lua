@@ -1319,7 +1319,7 @@ do
                     Event:Disconnect();
                 end);
             elseif Input.UserInputType == Enum.UserInputType.MouseButton2 and not Library:MouseIsOverOpenedFrame() then
-                ModeSelectOuter.Visible = true;
+                --ModeSelectOuter.Visible = true;
             end;
         end);
 
