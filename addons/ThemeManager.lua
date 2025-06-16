@@ -76,11 +76,11 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:CreateThemeManager(groupbox)
-		groupbox:AddLabel('Background color'):AddColorPicker('BackgroundColor', { Default = self.Library.BackgroundColor });
-		groupbox:AddLabel('Main color')	:AddColorPicker('MainColor', { Default = self.Library.MainColor });
-		groupbox:AddLabel('Accent color'):AddColorPicker('AccentColor', { Default = self.Library.AccentColor });
-		groupbox:AddLabel('Outline color'):AddColorPicker('OutlineColor', { Default = self.Library.OutlineColor });
-		groupbox:AddLabel('Font color')	:AddColorPicker('FontColor', { Default = self.Library.FontColor });
+		groupbox:AddLabel('Background Color'):AddColorPicker('BackgroundColor', { Default = self.Library.BackgroundColor });
+		groupbox:AddLabel('Main Color')	:AddColorPicker('MainColor', { Default = self.Library.MainColor });
+		groupbox:AddLabel('Accent Color'):AddColorPicker('AccentColor', { Default = self.Library.AccentColor });
+		groupbox:AddLabel('Outline Color'):AddColorPicker('OutlineColor', { Default = self.Library.OutlineColor });
+		groupbox:AddLabel('Font Color')	:AddColorPicker('FontColor', { Default = self.Library.FontColor });
 
 		local ThemesArray = {}
 		for Name, Theme in next, self.BuiltInThemes do
@@ -92,7 +92,7 @@ local ThemeManager = {} do
 		groupbox:AddDivider()
 		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Theme list', Values = ThemesArray, Default = 1 })
 
-		groupbox:AddButton('Set as default', function()
+		groupbox:AddButton('Set As Default', function()
 			self:SaveDefault(Options.ThemeManager_ThemeList.Value)
 			self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_ThemeList.Value))
 		end)
@@ -106,21 +106,26 @@ local ThemeManager = {} do
 		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
 		groupbox:AddDivider()
 		
-		groupbox:AddButton('Save theme', function() 
+		groupbox:AddButton('Save Theme', function() 
 			self:SaveCustomTheme(Options.ThemeManager_CustomThemeName.Value)
 
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
 			Options.ThemeManager_CustomThemeList:SetValue(nil)
-		end):AddButton('Load theme', function() 
+		end):AddButton('Load Theme', function() 
 			self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value) 
-		end)
+		end):AddButton('Delete Theme', function() 
+			self:DeleteCustomTheme(Options.ThemeManager_CustomThemeList.Value)
 
-		groupbox:AddButton('Refresh list', function()
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
 			Options.ThemeManager_CustomThemeList:SetValue(nil)
 		end)
 
-		groupbox:AddButton('Set as default', function()
+		groupbox:AddButton('Refresh List', function()
+			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
+			Options.ThemeManager_CustomThemeList:SetValue(nil)
+		end)
+
+		groupbox:AddButton('Set As Default', function()
 			if Options.ThemeManager_CustomThemeList.Value ~= nil and Options.ThemeManager_CustomThemeList.Value ~= '' then
 				self:SaveDefault(Options.ThemeManager_CustomThemeList.Value)
 				self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_CustomThemeList.Value))
@@ -169,6 +174,14 @@ local ThemeManager = {} do
 		end
 
 		writefile(self.Folder .. '/themes/' .. file .. '.json', httpService:JSONEncode(theme))
+	end
+
+	function ThemeManager:DeleteCustomTheme(file)
+		if file:gsub(' ', '') == '' then
+			return self.Library:Notify('Invalid file name for theme (empty)', 3)
+		end
+
+		delfile(self.Folder .. '/themes/' .. file .. '.json')
 	end
 
 	function ThemeManager:ReloadCustomThemes()
