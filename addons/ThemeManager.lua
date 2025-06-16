@@ -113,7 +113,9 @@ local ThemeManager = {} do
 			Options.ThemeManager_CustomThemeList:SetValue(nil)
 		end):AddButton('Load Theme', function() 
 			self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value) 
-		end):AddButton('Delete Theme', function() 
+		end)
+		
+		groupbox:AddButton('Delete Theme', function() 
 			self:DeleteCustomTheme(Options.ThemeManager_CustomThemeList.Value)
 
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
