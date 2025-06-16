@@ -4,16 +4,30 @@ local ThemeManager = {} do
 	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
 
 	ThemeManager.Library = nil
-	ThemeManager.BuiltInThemes = {
-		['Default'] 		= { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1c1c1c","AccentColor":"8b8b8b","BackgroundColor":"141414","OutlineColor":"323232"}') },
-		['BBot'] 			= { 2, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1e1e","AccentColor":"7e48a3","BackgroundColor":"232323","OutlineColor":"141414"}') },
-		['Fatality']		= { 3, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1842","AccentColor":"c50754","BackgroundColor":"191335","OutlineColor":"3c355d"}') },
-		['Jester'] 			= { 4, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"242424","AccentColor":"db4467","BackgroundColor":"1c1c1c","OutlineColor":"373737"}') },
-		['Mint'] 			= { 5, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"242424","AccentColor":"3db488","BackgroundColor":"1c1c1c","OutlineColor":"373737"}') },
-		['Tokyo Night'] 	= { 6, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"191925","AccentColor":"6759b3","BackgroundColor":"16161f","OutlineColor":"323232"}') },
-		['Ubuntu'] 			= { 7, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"3e3e3e","AccentColor":"e2581e","BackgroundColor":"323232","OutlineColor":"191919"}') },
-		['Quartz'] 			= { 8, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"232330","AccentColor":"426e87","BackgroundColor":"1d1b26","OutlineColor":"27232f"}') },
-	}
+    ThemeManager.BuiltInThemes = {
+        ['Default']        = { 1, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1c1c1c","AccentColor":"8b8b8b","BackgroundColor":"141414","OutlineColor":"323232"}') },
+        ['BBot']           = { 2, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1e1e","AccentColor":"7e48a3","BackgroundColor":"232323","OutlineColor":"141414"}') },
+        ['Fatality']       = { 3, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1842","AccentColor":"c50754","BackgroundColor":"191335","OutlineColor":"3c355d"}') },
+        ['Jester']         = { 4, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"242424","AccentColor":"db4467","BackgroundColor":"1c1c1c","OutlineColor":"373737"}') },
+        ['Mint']           = { 5, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"242424","AccentColor":"3db488","BackgroundColor":"1c1c1c","OutlineColor":"373737"}') },
+        ['Tokyo Night']    = { 6, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"191925","AccentColor":"6759b3","BackgroundColor":"16161f","OutlineColor":"323232"}') },
+        ['Ubuntu']         = { 7, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"3e3e3e","AccentColor":"e2581e","BackgroundColor":"323232","OutlineColor":"191919"}') },
+        ['Quartz']         = { 8, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"232330","AccentColor":"426e87","BackgroundColor":"1d1b26","OutlineColor":"27232f"}') },
+        ['Neon Night']     = { 9, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"0f0f1c","AccentColor":"00ffff","BackgroundColor":"0a0a14","OutlineColor":"1e1e2e"}') },
+        ['Nord']           = { 10, httpService:JSONDecode('{"FontColor":"d8dee9","MainColor":"3b4252","AccentColor":"81a1c1","BackgroundColor":"2e3440","OutlineColor":"434c5e"}') },
+        ['Dracula']        = { 11, httpService:JSONDecode('{"FontColor":"f8f8f2","MainColor":"282a36","AccentColor":"bd93f9","BackgroundColor":"1e1f29","OutlineColor":"44475a"}') },
+        ['Nightshade']     = { 12, httpService:JSONDecode('{"FontColor":"eeeeee","MainColor":"121212","AccentColor":"ff2e63","BackgroundColor":"0d0d0d","OutlineColor":"1f1f1f"}') },
+        ['Carbon']         = { 13, httpService:JSONDecode('{"FontColor":"e0e0e0","MainColor":"202020","AccentColor":"4c9a2a","BackgroundColor":"161616","OutlineColor":"2a2a2a"}') },
+        ['Tokyo Storm']    = { 14, httpService:JSONDecode('{"FontColor":"cdd6f4","MainColor":"1a1b26","AccentColor":"7aa2f7","BackgroundColor":"16161e","OutlineColor":"24283b"}') },
+        ['Noir Blue']      = { 15, httpService:JSONDecode('{"FontColor":"cdd9e5","MainColor":"1b2b34","AccentColor":"4f97d7","BackgroundColor":"1a212e","OutlineColor":"2c3a47"}') },
+        ['Muted Forest']   = { 16, httpService:JSONDecode('{"FontColor":"d6e1cc","MainColor":"1e2c22","AccentColor":"4a7c59","BackgroundColor":"141d18","OutlineColor":"2b3d30"}') },
+        ['Charcoal Rose']  = { 17, httpService:JSONDecode('{"FontColor":"e6dada","MainColor":"2c1e23","AccentColor":"c4717d","BackgroundColor":"1a1114","OutlineColor":"3e2b32"}') },
+        ['Terminal Night'] = { 18, httpService:JSONDecode('{"FontColor":"c0caf5","MainColor":"1a1b26","AccentColor":"9ece6a","BackgroundColor":"13141c","OutlineColor":"24283b"}') },
+        ['Cyber Toxic']    = { 19, httpService:JSONDecode('{"FontColor":"d0ffd0","MainColor":"0d0d0d","AccentColor":"39ff14","BackgroundColor":"000000","OutlineColor":"1a1a1a"}') },
+        ['Infrared']       = { 20, httpService:JSONDecode('{"FontColor":"ffb3b3","MainColor":"1a0a0a","AccentColor":"ff0055","BackgroundColor":"0f0000","OutlineColor":"330000"}') },
+        ['Vapor Purple']   = { 21, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"130c1c","AccentColor":"b267ff","BackgroundColor":"0a0512","OutlineColor":"1e1528"}') },
+        ['Arcade']         = { 22, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"0c0f1c","AccentColor":"00d9ff","BackgroundColor":"060812","OutlineColor":"1b1e30"}') },
+    }
 
 	function ThemeManager:ApplyTheme(theme)
 		local customThemeData = self:GetCustomTheme(theme)
@@ -33,6 +47,7 @@ local ThemeManager = {} do
 		end
 
 		self:ThemeUpdate()
+        Library:Notify(("Loaded theme %q"):format(theme), 3)
 	end
 
 	function ThemeManager:ThemeUpdate()
@@ -114,8 +129,8 @@ local ThemeManager = {} do
 		end):AddButton('Load Theme', function() 
 			self:ApplyTheme(Options.ThemeManager_CustomThemeList.Value) 
 		end)
-		
-		groupbox:AddButton('Delete Theme', function() 
+        
+        groupbox:AddButton('Delete Theme', function() 
 			self:DeleteCustomTheme(Options.ThemeManager_CustomThemeList.Value)
 
 			Options.ThemeManager_CustomThemeList:SetValues(self:ReloadCustomThemes())
@@ -178,16 +193,8 @@ local ThemeManager = {} do
 		writefile(self.Folder .. '/themes/' .. file .. '.json', httpService:JSONEncode(theme))
 	end
 
-	function ThemeManager:DeleteCustomTheme(file)
-		if file:gsub(' ', '') == '' then
-			return self.Library:Notify('Invalid file name for theme (empty)', 3)
-		end
-
-		delfile(self.Folder .. '/themes/' .. file .. '.json')
-	end
-
 	function ThemeManager:ReloadCustomThemes()
-		local list = listfiles(self.Folder .. '/settings')
+		local list = listfiles(self.Folder .. '/themes')
 
 		local out = {}
 		for i = 1, #list do
@@ -196,21 +203,28 @@ local ThemeManager = {} do
 				-- i hate this but it has to be done ...
 
 				local pos = file:find('.json', 1, true)
-				local start = pos
-
 				local char = file:sub(pos, pos)
+
 				while char ~= '/' and char ~= '\\' and char ~= '' do
 					pos = pos - 1
 					char = file:sub(pos, pos)
 				end
 
 				if char == '/' or char == '\\' then
-					table.insert(out, file:sub(pos + 1, start - 1))
+					table.insert(out, file:sub(pos + 1))
 				end
 			end
 		end
-		
+
 		return out
+	end
+
+    function ThemeManager:DeleteCustomTheme(file)
+		if not file or file:gsub(' ', '') == '' then
+			return self.Library:Notify('Invalid file name for theme (empty)', 3)
+		end
+
+		delfile(self.Folder .. '/themes/' .. file)
 	end
 
 	function ThemeManager:SetLibrary(lib)
