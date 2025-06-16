@@ -1,6 +1,6 @@
 local httpService = game:GetService('HttpService')
 local ThemeManager = {} do
-	ThemeManager.Folder = 'LinoriaLibSettings'
+	ThemeManager.Folder = 'ozashub-rewrite'
 	-- if not isfolder(ThemeManager.Folder) then makefolder(ThemeManager.Folder) end
 
 	ThemeManager.Library = nil
@@ -90,7 +90,7 @@ local ThemeManager = {} do
 		table.sort(ThemesArray, function(a, b) return self.BuiltInThemes[a][1] < self.BuiltInThemes[b][1] end)
 
 		groupbox:AddDivider()
-		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Theme list', Values = ThemesArray, Default = 1 })
+		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Theme List', Values = ThemesArray, Default = 1 })
 
 		groupbox:AddButton('Set As Default', function()
 			self:SaveDefault(Options.ThemeManager_ThemeList.Value)
@@ -102,8 +102,8 @@ local ThemeManager = {} do
 		end)
 
 		groupbox:AddDivider()
-		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom theme name' })
-		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
+		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom Theme Name' })
+		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom Themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
 		groupbox:AddDivider()
 		
 		groupbox:AddButton('Save Theme', function() 
@@ -185,7 +185,7 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:ReloadCustomThemes()
-		local list = listfiles(self.Folder .. '/themes')
+		local list = listfiles(self.Folder .. '/settings')
 
 		local out = {}
 		for i = 1, #list do
@@ -194,19 +194,20 @@ local ThemeManager = {} do
 				-- i hate this but it has to be done ...
 
 				local pos = file:find('.json', 1, true)
-				local char = file:sub(pos, pos)
+				local start = pos
 
+				local char = file:sub(pos, pos)
 				while char ~= '/' and char ~= '\\' and char ~= '' do
 					pos = pos - 1
 					char = file:sub(pos, pos)
 				end
 
 				if char == '/' or char == '\\' then
-					table.insert(out, file:sub(pos + 1))
+					table.insert(out, file:sub(pos + 1, start - 1))
 				end
 			end
 		end
-
+		
 		return out
 	end
 
