@@ -1,7 +1,7 @@
 local httpService = game:GetService('HttpService')
 
 local SaveManager = {} do
-	SaveManager.Folder = 'LinoriaLibSettings'
+	SaveManager.Folder = 'ozashub-rewrite'
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
@@ -203,12 +203,12 @@ local SaveManager = {} do
 		
 		local section = tab:AddRightGroupbox('Configuration')
 		
-		section:AddInput('SaveManager_ConfigName',    { Text = 'Config name' })
-		section:AddDropdown('SaveManager_ConfigList', { Text = 'Config list', Values = self:RefreshConfigList(), AllowNull = true })
+		section:AddInput('SaveManager_ConfigName',    { Text = 'Config Name' })
+		section:AddDropdown('SaveManager_ConfigList', { Text = 'Config List', Values = self:RefreshConfigList(), AllowNull = true })
 
 		section:AddDivider()
 
-		section:AddButton('Create config', function()
+		section:AddButton('Create Config', function()
 			local name = Options.SaveManager_ConfigName.Value
 
 			if name:gsub(' ', '') == '' then 
@@ -224,7 +224,7 @@ local SaveManager = {} do
 
 			Options.SaveManager_ConfigList:SetValues(self:RefreshConfigList())
 			Options.SaveManager_ConfigList:SetValue(nil)
-		end):AddButton('Load config', function()
+		end):AddButton('Load Config', function()
 			local name = Options.SaveManager_ConfigList.Value
 
 			local success, err = self:Load(name)
@@ -235,7 +235,7 @@ local SaveManager = {} do
 			self.Library:Notify(string.format('Loaded config %q', name))
 		end)
 
-		section:AddButton('Overwrite config', function()
+		section:AddButton('Overwrite Config', function()
 			local name = Options.SaveManager_ConfigList.Value
 
 			local success, err = self:Save(name)
@@ -244,25 +244,40 @@ local SaveManager = {} do
 			end
 
 			self.Library:Notify(string.format('Overwrote config %q', name))
+		end):AddButton('Delete Config', function()
+			local name = Options.SaveManager_ConfigList.Value
+
+			local success, err = pcall(function()
+				delfile(self.Folder .. '/settings/' .. name .. '.json')
+
+				Options.SaveManager_ConfigList:SetValues(self:RefreshConfigList())
+				Options.SaveManager_ConfigList:SetValue(nil)
+			end)
+
+			if not success then
+				return self.Library:Notify('Failed to delete config: ' .. err)
+			end
+
+			self.Library:Notify(string.format('Deleted config %q', name))
 		end)
 
-		section:AddButton('Refresh list', function()
+		section:AddButton('Refresh List', function()
 			Options.SaveManager_ConfigList:SetValues(self:RefreshConfigList())
 			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
 
-		section:AddButton('Set as autoload', function()
+		section:AddButton('Set As Autoload', function()
 			local name = Options.SaveManager_ConfigList.Value
 			writefile(self.Folder .. '/settings/autoload.txt', name)
 			SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
 			self.Library:Notify(string.format('Set %q to auto load', name))
 		end)
 
-		SaveManager.AutoloadLabel = section:AddLabel('Current autoload config: none', true)
+		SaveManager.AutoloadLabel = section:AddLabel('Current Autoload Config: None', true)
 
 		if isfile(self.Folder .. '/settings/autoload.txt') then
 			local name = readfile(self.Folder .. '/settings/autoload.txt')
-			SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
+			SaveManager.AutoloadLabel:SetText('Current Autoload Config: ' .. name)
 		end
 
 		SaveManager:SetIgnoreIndexes({ 'SaveManager_ConfigList', 'SaveManager_ConfigName' })
