@@ -3558,7 +3558,7 @@ function Library:CreateWindow(...)
         local FadeTime = Config.MenuFadeTime;
         Fading = true;
         Toggled = (not Toggled);
-        ModalElement.Modal = Toggled;
+        ModalElement.Modal = (((Toggles.UnlockMouse and Toggles.UnlockMouse.Value) or false) and Toggled) or false;
 
         if Toggled then
             -- A bit scuffed, but if we're going from not toggled -> toggled we want to show the frame immediately so that the fade is visible.
@@ -3635,11 +3635,12 @@ function Library:CreateWindow(...)
                     continue;
                 end;
 
-                TweenService:Create(Desc, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { [Prop] = Toggled and Cache[Prop] or 1 }):Play();
+                --TweenService:Create(Desc, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear), { [Prop] = Toggled and Cache[Prop] or 1 }):Play();
+                Desc[Prop] = Toggled and Cache[Prop] or 1
             end;
         end;
 
-        task.wait(FadeTime);
+        --task.wait(FadeTime);
 
         Outer.Visible = Toggled;
 
